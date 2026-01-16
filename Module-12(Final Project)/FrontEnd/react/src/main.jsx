@@ -6,10 +6,10 @@ import { router } from './router/router.jsx'
 import { RouterProvider } from 'react-router'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <StrictMode >
 
-    <RouterProvider router={router} >   </RouterProvider>
-
+<div className='font-urbanist max-w-7xl mx-auto'>    <RouterProvider router={router} >   </RouterProvider>
+</div>
 
   </StrictMode>,
 )
