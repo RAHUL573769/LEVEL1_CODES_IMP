@@ -3,3 +3,5 @@ I am developing a website using react,react router,tailwind css and daisy ui.I h
 I want the logo in the card center aligned ,also need nedd the text in the card center aligned  at the same time time i want to add mouse hover on thwe card
 
 in the same project i want to add a section where i can slide the logo ofthe client using  our services .ihave 7 companylogos .i want to slide continoslyfrom left to right ..howto implement this andexplain
+
+In the same project give me a sectonfor benefits ..itwill have 3 horizontal cards....----left side will have image ..horizatal line break =right side (expanding)titile and description..with Animate onScroll fade
