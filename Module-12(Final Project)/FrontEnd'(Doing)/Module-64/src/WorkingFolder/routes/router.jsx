@@ -5,6 +5,9 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Register/Register";
 
+import PrivateRoute from "./PrivateRoute";
+import Orders from './../pages/Orders/Orders';
+
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -12,7 +15,14 @@ export const router = createBrowserRouter([
             RootLayout,
 
         children: [
-            { index: true, Component: Home }
+            { index: true, Component: Home },
+            {
+                path: "orders",
+                // Component: Orders
+                element: <PrivateRoute>
+                    Orders
+                </PrivateRoute>
+            }
         ]
     }, {
         path: "/",
