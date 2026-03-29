@@ -5,3 +5,8 @@ I want the logo in the card center aligned ,also need nedd the text in the card 
 in the same project i want to add a section where i can slide the logo ofthe client using  our services .ihave 7 companylogos .i want to slide continoslyfrom left to right ..howto implement this andexplain
 
 In the same project give me a sectonfor benefits ..itwill have 3 horizontal cards....----left side will have image ..horizatal line break =right side (expanding)titile and description..with Animate onScroll fade
+
+I am builiding a website using react talwind,daisy ui ,eact router for a parcel delvery website.Ineed to ceratw a page coerage that will have title "We are aalable 6 districts",below there willbwe a sechbox where ican seachdiffent districts .First give e a map that ica showin the webste with code
+
+now i need searchbox where i type name of the district (ignore case and partial typeof district)and map will take meto maker of the district  ansd show the distrct
+code seems complicated canyou give asimpler ersion
