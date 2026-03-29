@@ -10,7 +10,7 @@ const Navbar = () => {
     logOut().then(data => console.log(data)).catch(error => console.log(error))
   }
   const navList = <>    <li><Link to='/coverage'>Coverage</Link></li>
-
+    <li><Link to='/send'>Send Parcel</Link></li>
     {user && <li><NavLink to='/orders'>Orders</NavLink></li>}
 
   </>

@@ -8,6 +8,7 @@ import Register from "../Authentication/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import Orders from './../pages/Orders/Orders';
 import Coverage from "../pages/Coverage/Coverage";
+import SendParcel from "../pages/SendParcel/SendParcel";
 
 export const router = createBrowserRouter([
     {
@@ -16,7 +17,7 @@ export const router = createBrowserRouter([
             RootLayout,
 
         children: [
-            { index: true, Component: Home },
+            { index: true, element: <Home></Home> },
 
             {
                 path: "/coverage",
@@ -29,7 +30,12 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute>
                     Orders
                 </PrivateRoute>
+            },
+            {
+                path: "/send",
+                element: <PrivateRoute><SendParcel></SendParcel></PrivateRoute>
             }
+
         ]
     }, {
         path: "/",

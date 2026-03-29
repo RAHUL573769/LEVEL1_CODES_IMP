@@ -10,3 +10,72 @@ I am builiding a website using react talwind,daisy ui ,eact router for a parcel 
 
 now i need searchbox where i type name of the district (ignore case and partial typeof district)and map will take meto maker of the district  ansd show the distrct
 code seems complicated canyou give asimpler ersion
+
+
+
+------------
+i need to buld a form to get data to swend a parcel Add Parcel (User)
+As the system is based on Door to Door delivery, Parcel needs both pickup and delivery location.
+
+Will have a Heading & a subtitle
+
+A Form with Multiple input field divided into 3 sub section
+
+Parcel Info (3):
+
+type (document, non-document), title, weight (if type non-document)
+Sender info (6):
+
+Name (prefilled), contact
+Select Region, Select Service Center
+Address, Pick up Instruction
+Receiver info (6):
+
+Name, contact
+Select Region, Select Service Center
+Address, Delivery Instruction
+Each of the fields are required except parcel weight
+
+The cost will be calculated based on type, service center & weight.
+
+On Clicking Submit Show user a Toast with Delivery Cost and a confirmation button. By clicking confirm, save the parcel info into the database with a creation_date
+
+--First give me the form using react hook form ,use tailwid amd daisyui and other necessary packages
+
+
+
+
+i need to buld a form to get data to swend a parcel Add Parcel (User)
+As the system is based on Door to Door delivery, Parcel needs both pickup and delivery location.
+
+Will have a Heading & a subtitle
+
+A Form with Multiple input field divided into 3 sub section
+
+Parcel Info (3):
+
+type (document, non-document), title, weight (if type non-document)
+Sender info (6):
+
+Name (prefilled), contact
+Select Region, Select Service Center
+Address, Pick up Instruction
+Receiver info (6):
+
+Name, contact
+Select Region, Select Service Center
+Address, Delivery Instruction
+Each of the fields are required except parcel weight
+
+The cost will be calculated based on type, service center & weight.
+
+On Clicking Submit Show user a Toast with Delivery Cost and a confirmation button. By clicking confirm, save the parcel info into the database with a creation_date
+
+--First give me the form using react hook form ,use tailwid amd daisyui and other necessary packages
+-----------
+iwant sender and receiver informationsde byside for larger derviceand makeit responsive fo alldevices ..give me the changed code with the changes marked
+
+-----------------
+please if you have the service center ,get regions name from there ad also inserice center   use distinct disstrict name data---make the pickup ad delivery instruction astext area
+----------
+attache the new ersion i this code
