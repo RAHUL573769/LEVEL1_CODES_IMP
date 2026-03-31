@@ -5,7 +5,10 @@ import logo1 from '../../../../assets/Zap-shift-Resources-main/assets/brands/ama
 import logo2 from '../../../../assets/Zap-shift-Resources-main/assets/brands/amazon.png'
 
 const logos = [
+
   logo1,
+
+
   logo2,
   "/logos/logo3.png",
   "/logos/logo4.png",

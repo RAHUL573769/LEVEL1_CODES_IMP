@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAuth from '../../../hooks/useAuth';
 import { generateTrackingId } from "../../utils/trackingId";
+import useAxisSecure from "../../../hooks/useAxisSecure";
 const serviceCenters = [
     { region: "Dhaka", district: "Dhaka", center: "Uttara Branch" },
     { region: "Dhaka", district: "Gazipur", center: "Gazipur Branch" },
@@ -17,6 +18,7 @@ const regions = [...new Set(serviceCenters.map((s) => s.region))];
 export default function ParcelForm() {
     const { register, handleSubmit, watch, reset } = useForm();
     const { user } = useAuth()
+    const axiosSecure = useAxisSecure()
     const [cost, setCost] = useState(null);
 
     const type = watch("type");
@@ -83,36 +85,38 @@ export default function ParcelForm() {
             paymentStatus: "unpaid",
         };
 
-        const result = await Swal.fire({
-            title: "Confirm Parcel",
-            html: `
-      <div style="text-align:left">
-        <p><strong>Tracking ID:</strong> ${trackingId}</p>
-        <p><strong>Email:</strong> ${user?.email}</p>
-        <hr/>
-        <p><strong>Total Cost:</strong>
-          <span style="color:green;font-weight:bold">৳${cost}</span>
-        </p>
-      </div>
-    `,
-            icon: "info",
-            showCancelButton: true,
-            confirmButtonText: "Proceed to Payment 💳",
-            cancelButtonText: "Edit",
-        });
+        axiosSecure.post("/parcels", parcelData).then(res => { console.log(res) }).catch(error => { console.log(error) })
 
-        if (result.isConfirmed) {
-            console.log("SAVE TO DB 👉", parcelData);
+        //     const result = await Swal.fire({
+        //         title: "Confirm Parcel",
+        //         html: `
+        //   <div style="text-align:left">
+        //     <p><strong>Tracking ID:</strong> ${trackingId}</p>
+        //     <p><strong>Email:</strong> ${user?.email}</p>
+        //     <hr/>
+        //     <p><strong>Total Cost:</strong>
+        //       <span style="color:green;font-weight:bold">৳${cost}</span>
+        //     </p>
+        //   </div>
+        // `,
+        //         icon: "info",
+        //         showCancelButton: true,
+        //         confirmButtonText: "Proceed to Payment 💳",
+        //         cancelButtonText: "Edit",
+        //     });
 
-            Swal.fire({
-                title: "Parcel Created!",
-                html: `<p>Your Tracking ID:</p>
-             <strong style="font-size:18px">${trackingId}</strong>`,
-                icon: "success",
-            });
+        // if (result.isConfirmed) {
+        //     console.log("SAVE TO DB 👉", parcelData);
 
-            reset();
-        }
+        //     Swal.fire({
+        //         title: "Parcel Created!",
+        //         html: `<p>Your Tracking ID:</p>
+        //      <strong style="font-size:18px">${trackingId}</strong>`,
+        //         icon: "success",
+        //     });
+
+        //     reset();
+        // }
     };
 
     return (

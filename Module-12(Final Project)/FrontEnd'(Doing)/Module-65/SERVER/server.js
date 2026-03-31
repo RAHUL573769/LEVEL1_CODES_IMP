@@ -25,10 +25,12 @@ app.get("/api/health", (req, res) => {
 });
 
 // MongoDB connection
+
 const uri = process.env.MONGODB_LOCAL
 console.log(uri)
 const client = new MongoClient(uri, {
     serverApi: {
+
         version: ServerApiVersion.v1,
         strict: true,
         deprecationErrors: true,
@@ -40,6 +42,24 @@ async function run() {
         // Connect the client
         await client.connect();
 
+
+        const database = client.db("parcelDb")
+        const parcelCollection = database.collection("parcel")
+        app.get("/parcels", async (req, res) => {
+            const parcel = await parcelCollection.find().toArray()
+            res.send(parcel)
+        })
+        app.post("/parcels", async (req, res) => {
+            try {
+                const newParcel = req.body
+                const result = await parcelCollection.insertOne(newParcel)
+                res.status(200).send(result)
+
+            } catch (error) {
+                console.log(error)
+                res.status(500).send("Error")
+            }
+        })
         // Ping the database
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -49,6 +69,7 @@ async function run() {
 }
 
 run().catch(console.dir);
+
 
 // Start server
 app.listen(PORT, () => {
