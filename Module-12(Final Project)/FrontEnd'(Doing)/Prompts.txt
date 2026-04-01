@@ -101,3 +101,33 @@ I need two more things,..Fromthe data collected fromthe form add the user whois 
 I need two more things,..Fromthe data collected fromthe form add the user whois logged in ,user email address ,the user who is logged in .icangeththis infofrom useAthhook.ad ineedtosavethe email address of the person creating the parcel ..also i need tosave the time of parcel ceation in future ,iwll need to show the tracking informaton .so keep in mind to save time and date format correctly to displayinwebsite ..and also suggest any more useful data ishould save for parceldeliveey system..gie me fullcode
 ------------
 generate a unique tracking ID
+
+---------------
+I hav e parcel data in this Format  :{
+    "_id": "69cbb4d4589f8a43ec01291b",
+    "type": "non-document",
+    "title": "rdrde",
+    "senderName": "Rahul",
+    "senderContact": "4",
+    "senderRegion": "Sylhet",
+    "senderCenter": "Sylhet Branch",
+    "senderAddress": "gergre",
+    "pickupInstruction": "gresgres",
+    "receiverName": "RAHUL RUDRA",
+    "receiverContact": "RAHUL RUDRA",
+    "receiverRegion": "Chattogram",
+    "receiverCenter": "Agrabad Branch",
+    "receiverAddress": "grgre",
+    "deliveryInstruction": "regresgbre",
+    "terms": true,
+    "weight": "3",
+    "cost": 150,
+    "trackingId": "TRK-780892-M1M7",
+    "createdAt": "2026-03-31T11:49:40.892Z",
+    "createdBy": {
+      "email": "rahulrudra665@gmail.com",
+      "uid": "IjZnJ8dnLtXgNjHAdKGF5TgQUpf2"
+    },
+    "status": "pending",
+    "paymentStatus": "unpaid"
+  }....and I am loading data in arrary.I want todisplaydta in form of table using daidy ui...I want to dispaly data  having fields Docunet,non document ,createdAt,cost ,payment sdtaus (paid or unpaid withcolorcode)and some actons tohave View ,details pay anddelete ..give mereact component

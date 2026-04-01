@@ -49,6 +49,22 @@ async function run() {
             const parcel = await parcelCollection.find().toArray()
             res.send(parcel)
         })
+
+        //
+        app.get("/parcels", async (req, res) => {
+            try {
+                const userEmail = req.params.email
+                const query = userEmail ? { createdBy: userEmail } : {}
+                const options = {
+                    sort: { createdAt: -1 }
+                }
+                const parcels = await parcelCollection.find(query, options).toArray()
+                res.send(parcels)
+
+            } catch (error) {
+                console.log(error)
+            }
+        })
         app.post("/parcels", async (req, res) => {
             try {
                 const newParcel = req.body
@@ -60,6 +76,7 @@ async function run() {
                 res.status(500).send("Error")
             }
         })
+
         // Ping the database
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");

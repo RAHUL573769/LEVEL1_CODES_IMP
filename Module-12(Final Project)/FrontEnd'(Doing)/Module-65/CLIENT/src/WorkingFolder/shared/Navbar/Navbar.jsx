@@ -11,7 +11,14 @@ const Navbar = () => {
   }
   const navList = <>    <li><Link to='/coverage'>Coverage</Link></li>
     <li><Link to='/send'>Send Parcel</Link></li>
-    {user && <li><NavLink to='/orders'>Orders</NavLink></li>}
+    {user &&
+      <>
+        <li><NavLink to='/orders'>Orders</NavLink></li>
+        <li><NavLink to='/dashboard/myParcels'>Dashboard</NavLink></li>
+
+      </>
+
+    }
 
   </>
   return (
