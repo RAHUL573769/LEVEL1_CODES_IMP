@@ -3,6 +3,7 @@ import React from 'react';
 import useAuth from '../../../hooks/useAuth';
 import useAxisSecure from '../../../hooks/useAxisSecure';
 import { formatDate, getPaymentBadge } from '../../utils/dashboardUtls.jsx';
+import { useNavigate } from 'react-router';
 
 const MyParcels = () => {
     const { user } = useAuth()
@@ -15,7 +16,7 @@ const MyParcels = () => {
         }
 
     })
-
+    const navigate = useNavigate()
     // const formatDate = (date) => {
     //     return new Date(date).toLocaleString();
     // };
@@ -27,6 +28,11 @@ const MyParcels = () => {
     //         <span className="badge badge-error text-white">Unpaid</span>
     //     );
     // };
+
+    const handlePayment = (id) => {
+        console.log(id)
+        navigate(`/dashboard/payment/${id}`)
+    }
     console.log(user.email)
     return (
         <div className="overflow-x-auto">
@@ -78,6 +84,7 @@ const MyParcels = () => {
                                 </button>
 
                                 <button
+                                    onClick={() => handlePayment(parcel._id)}
                                     className={`btn btn-xs ${parcel.paymentStatus === "paid"
                                         ? "btn-disabled"
                                         : "btn-success"

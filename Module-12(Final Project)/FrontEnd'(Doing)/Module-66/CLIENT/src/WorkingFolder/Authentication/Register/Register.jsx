@@ -14,12 +14,14 @@ const Register = () => {
     } = useForm()
     const navigate = useNavigate()
     const location = useLocation()
+    const from = location.state?.from || "/"
     const { createUser } = useAuth()
     const onSubmit = (data) => {
         console.log(data)
         createUser(data.email, data.password).then(result => {
             console.log(result.user)
-            navigate(location.state || "/")
+            // navigate(location.state || "/")
+            navigate(from)
             // Navigate("/")
         }).catch(error => { console.log(error) })
         // console.log(createUser)
