@@ -1,13 +1,33 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
+import { useParams } from 'react-router';
+import useAxisSecure from '../../hooks/useAxisSecure';
+import { useQuery } from '@tanstack/react-query';
+import Loading from '../shared/Loading/loading';
 
 const CheckOut = () => {
+    const { id } = useParams()
 
+    const axiosSecure = useAxisSecure()
+    const { data: parcelInfo = {}, isError, isLoading } = useQuery({
+        queryKey: ["parcels", id], queryFn: async () => {
+            const res = await axiosSecure.get(`/parcels/${id}`)
+            return res.data
+        }
+    })
+    console.log('19', parcelInfo)
     const { loading } = useAuth()
     const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState("")
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+    if (isError) {
+        console.log(isError)
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
 

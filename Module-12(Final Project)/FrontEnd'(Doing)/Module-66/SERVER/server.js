@@ -2,7 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 // Initialize dotenv
 dotenv.config();
@@ -51,19 +51,26 @@ async function run() {
         })
 
         //
-        app.get("/parcels", async (req, res) => {
-            try {
-                const userEmail = req.params.email
-                const query = userEmail ? { createdBy: userEmail } : {}
-                const options = {
-                    sort: { createdAt: -1 }
-                }
-                const parcels = await parcelCollection.find(query, options).toArray()
-                res.send(parcels)
-
-            } catch (error) {
-                console.log(error)
+        app.get('/parcels', async (req, res) => {
+            const query = {}
+            const { email } = req.query;
+            // /parcels?email=''&
+            if (email) {
+                query.senderEmail = email;
             }
+
+            const options = { sort: { createdAt: -1 } }
+
+            const cursor = parcelsCollection.find(query, options);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
+        app.get('/parcels/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) }
+            const result = await parcelsCollection.findOne(query);
+            res.send(result);
         })
         app.post("/parcels", async (req, res) => {
             try {

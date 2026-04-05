@@ -1,20 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import useAuth from '../../../hooks/useAuth';
-import useAxisSecure from '../../../hooks/useAxisSecure';
 import { formatDate, getPaymentBadge } from '../../utils/dashboardUtls.jsx';
 import { useNavigate } from 'react-router';
+import useAxisSecure from '../../../hooks/useAxisSecure.jsx';
 
 const MyParcels = () => {
-    const { user } = useAuth()
-    const axiosSecure = useAxisSecure()
+    const { user } = useAuth();
+    const axiosSecure = useAxisSecure();
     const { data: parcels = [] } = useQuery({
-        queryKey: ['my-parcels', user.email],
+        queryKey: ['myParcels', user?.email],
         queryFn: async () => {
-            const result = await axiosSecure.get(`/parcels?email=${user.email}`)
-            return result.data
+            const res = await axiosSecure.get(`/parcels?email=${user.email}`);
+            return res.data;
         }
-
     })
     const navigate = useNavigate()
     // const formatDate = (date) => {
