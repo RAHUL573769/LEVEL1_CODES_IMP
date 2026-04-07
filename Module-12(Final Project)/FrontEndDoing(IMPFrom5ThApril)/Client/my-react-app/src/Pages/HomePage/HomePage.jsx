@@ -1,4 +1,5 @@
 
+import LogoSlider from '../CompanyLogoSSection/CompanyLogoSection';
 import Banner from './Banner/Banner';
 import HowItWorks from './HowItWorks/HowItWorks';
 
@@ -9,6 +10,7 @@ const HomePage = () => {
 
             <Banner></Banner>
             <HowItWorks></HowItWorks>
+            <LogoSlider></LogoSlider>
         </div>
     );
 };

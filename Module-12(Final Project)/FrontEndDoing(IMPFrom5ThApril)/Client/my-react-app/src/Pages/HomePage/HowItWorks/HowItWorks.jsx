@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 "use client";
-import React from "react";
+
 
 
 import { motion } from 'framer-motion';
@@ -56,9 +56,19 @@ const HowItWorks = () => {
                     transition={{ duration: 0.5 }}
                     className="text-3xl md:text-4xl font-bold text-center mb-12"
                 >
+
+
+
                     How It Works
                 </motion.h2>
-
+                {/* -----------------------------------
+                On Load:
+                fade in (opacity)
+                slide up (y)
+                On Hover:
+                move up (y: -10)
+                zoom slightly (scale: 1.03)
+--------------------------------------- */}
                 {/* Cards */}
                 <motion.div
                     variants={container}
