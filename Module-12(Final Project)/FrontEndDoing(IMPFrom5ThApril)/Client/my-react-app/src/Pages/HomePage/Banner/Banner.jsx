@@ -9,7 +9,7 @@ import img2 from "../../../Zap-shift-Resources/assets/banner/banner2.png"
 import img3 from "../../../Zap-shift-Resources/assets/banner/banner3.png"
 const Banner = () => {
     return (
-        <Carousel>
+        <Carousel autoPlay={true} infiniteLoop={true}>
             <div>
                 <img src={img1} />
                 <p className="legend">Slide 1</p>
