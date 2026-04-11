@@ -6,6 +6,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import create from './Components/CretaeUser/create';
 import update from './Components/UpdateUser/update';
 import dlete from './Components/DeleteUser/dlete';
+import Create from './Components/CretaeUser/create'
+import Update from './Components/UpdateUser/update'
+import { Toaster } from 'react-hot-toast'
   const router = createBrowserRouter([
     {
       path: "/",
@@ -13,19 +16,32 @@ import dlete from './Components/DeleteUser/dlete';
     },
     {
       path:"/add",
-      element:<create></create>
+      element:<Create></Create>
     },
     {
-      path: "update",
-      element:<update></update>
+      path: "/edit/:id",
+      element:<Update></Update>
     },
      {
-      path: "delete",
+      path: "/delete",
       element:<dlete></dlete>
     }
   ])
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-   <RouterProvider router={router}> <App /></RouterProvider>
+
+
+    <RouterProvider router={router}>
+
+
+
+      <Toaster position="top-right" reverseOrder={false}>
+
+            <App />
+  </Toaster>
+
+
+    </RouterProvider>
+
   </StrictMode>,
 )

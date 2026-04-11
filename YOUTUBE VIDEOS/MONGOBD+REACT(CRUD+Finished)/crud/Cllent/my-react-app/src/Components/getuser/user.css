@@ -5,6 +5,9 @@
     background-color: #f9fbff;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    /* NEW: Fade + slide animation */
+    animation: fadeInUp 0.6s ease-in-out;
 }
 
 /* Add Button */
@@ -17,11 +20,14 @@
     text-decoration: none;
     border-radius: 6px;
     font-weight: 500;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
 }
 
+/* NEW: Button hover animation */
 .addUser:hover {
     background-color: #43a047;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 /* Table Styling */
@@ -48,11 +54,18 @@
 .userTable td {
     padding: 12px;
     border-bottom: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+/* NEW: Row animation */
+.userTable tbody tr {
+    transition: all 0.3s ease;
 }
 
 /* Row Hover */
 .userTable tbody tr:hover {
     background-color: #f1f5ff;
+    transform: scale(1.01);
 }
 
 /* Buttons */
@@ -63,11 +76,18 @@
     background-color: #e74c3c;
     color: white;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
+/* NEW: Button animation */
 .userTable button:hover {
     background-color: #c0392b;
+    transform: scale(1.1);
+}
+
+/* NEW: Smooth row entry animation */
+.userTable tbody tr {
+    animation: fadeInRow 0.5s ease forwards;
 }
 
 /* Responsive */
@@ -106,5 +126,31 @@
         padding-left: 10px;
         font-weight: bold;
         text-align: left;
+    }
+}
+
+/* ===== KEYFRAMES ===== */
+
+/* Fade in main container */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Row fade animation */
+@keyframes fadeInRow {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
