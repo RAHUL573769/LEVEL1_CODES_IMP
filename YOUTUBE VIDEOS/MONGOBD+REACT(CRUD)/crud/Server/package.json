@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": " nodemon ./server/server.js"
+    "dev": "nodemon ./server/server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:watch": "esw . --ext .js,.jsx --watch --fix"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +21,10 @@
     "express": "^5.2.1",
     "mongoose": "^9.4.1",
     "nodemon": "^3.1.14"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-watch": "^8.0.0"
   }
 }
