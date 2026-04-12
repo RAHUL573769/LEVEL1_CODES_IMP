@@ -20,4 +20,8 @@ export const router = createBrowserRouter([
         ]
 
     },
+    {
+        path: "/",
+        Component:<Auth98017
+    }
 ]);
