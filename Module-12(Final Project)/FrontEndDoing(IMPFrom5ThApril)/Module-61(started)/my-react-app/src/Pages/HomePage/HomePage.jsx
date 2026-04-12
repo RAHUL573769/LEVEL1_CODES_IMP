@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
-import LogoSlider from '../CompanyLogoSSection/CompanyLogoSection';
-import Reviews from '../Reviews/Reviews';
+import LogoSlider from './CompanyLogoSSection/CompanyLogoSection';
+import Reviews from './Reviews/Reviews';
 import Banner from './Banner/Banner';
 import HowItWorks from './HowItWorks/HowItWorks';
 import CoveragePage from './Coverage/CoveragePage';

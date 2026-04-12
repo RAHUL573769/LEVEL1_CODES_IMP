@@ -19,20 +19,3 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
-
-
-
-
-VITE_apiKey=AIzaSyCqfhJkHOu4cRO9dgeQbZrwe3pTkvYusyI
-VITE_authDomain=zapshift-6d08c.firebaseapp.com
-VITE_projectId=zapshift-6d08c
-VITE_storageBucket=zapshift-6d08c.firebasestorage.app
-VITE_messagingSenderId=205677880826
-VITE_appId=1:205677880826:web:25ca20406583e41ca53043
-
-apiKey: "AIzaSyCqfhJkHOu4cRO9dgeQbZrwe3pTkvYusyI",
-  authDomain: "zapshift-6d08c.firebaseapp.com",
-  projectId: "zapshift-6d08c",
-  storageBucket: "zapshift-6d08c.firebasestorage.app",
-  messagingSenderId: "205677880826",
-  appId: "1:205677880826:web:25ca20406583e41ca53043"
