@@ -5,6 +5,8 @@ import CoveragePage from '../Pages/HomePage/Coverage/CoveragePage';
 import AuthLayout from './../layouts/AuthLayout';
 import Login from "../Pages/AuthPage/Login/Login";
 import Register from "../Pages/AuthPage/Register/Register";
+import PrivateRoute from "./PrivateRoute";
+import BeRider from "../Pages/BeRider/BeRider";
 
 
 export const router = createBrowserRouter([
@@ -24,7 +26,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/auth",
+    path: "/",
     element: <AuthLayout />,
     children: [
       {
@@ -37,4 +39,10 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/beRider",
+    element: <PrivateRoute>
+      <BeRider></BeRider>
+    </PrivateRoute>
+  }
 ]);

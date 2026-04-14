@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import { motion } from 'framer-motion';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -8,29 +8,36 @@ import { useForm } from "react-hook-form";
 const Login = () => {
   const { signInWithGoogle,signInWithEmailAndPasswordFunction } = useAuth();
 
-
-
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
+         navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-  const {
-    register,
-    handleSubmit,
-
-
-  } = useForm()
+const {
+  register,
+  handleSubmit,
+  formState: { errors }
+} = useForm();
   const onSubmit = (data) =>
   {
     console.log(data)
-    signInWithEmailAndPasswordFunction(data.email, data.password)
-      .then(res =>console.log(res))
+   signInWithEmailAndPasswordFunction(data.email, data.password)
+  .then(res => {
+    console.log(res);
+    navigate(from, { replace: true });
+  })
+  .catch(err => {
+    console.error(err);
+  });
 
   }
 return (
@@ -52,17 +59,16 @@ return (
         {/* FORM START */}
         <form onSubmit={handleSubmit(onSubmit)}>
 
-          {/* Email */}
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}>
-            <label className="label">Email</label>
+        {/* Email */}
+        <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}>
+          <label className="label">Email</label>
 
-
-         <input type="email"
-              name="email"
-              className="input input-bordered w-full"
-              placeholder="Enter your email"
-              {...register("email", { required: true })} />
-          </motion.div>
+          <input type="email"
+            className="input input-bordered w-full"
+            placeholder="Enter your email"
+            {...register("email", { required: true })} />
+          {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
+        </motion.div>
 
           {/* Password */}
           <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }}>
@@ -113,9 +119,10 @@ return (
 
         <p className="text-center text-sm mt-4">
           Don’t have an account?{" "}
-          <Link to="/auth/register" className="link">
+          <Link to="/register" className="link">
             Register
           </Link>
+          <button>Be a Rider</button>
         </p>
       </div>
     </motion.div>
