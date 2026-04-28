@@ -14,7 +14,7 @@ const Navbar = () => {
     const navItems = <>
    <NavLink to='/coverage'>Coverage</NavLink>
 
-
+<NavLink to='/send' >Send Parcel</NavLink>
 
     </>
     return (
