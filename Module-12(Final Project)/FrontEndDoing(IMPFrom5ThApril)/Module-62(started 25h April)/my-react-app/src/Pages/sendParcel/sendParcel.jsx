@@ -5,7 +5,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
 import { useLoaderData, useNavigate } from 'react-router';
 import useAxiossSecure from '../../hooks/useAxos';
-
+import Swal from "sweetalert2";
 const SendParcel = () => {
     const {
         register,
@@ -33,64 +33,120 @@ const SendParcel = () => {
 
 
     const handleSendParcel = data => {
-        console.log(data);
+    const isDocument = data.parcelType === 'document';
+    const isSameDistrict = data.senderDistrict === data.receiverDistrict;
+    const parcelWeight = parseFloat(data.parcelWeight) || 0;
+console.log(user)
+    let cost = 0;
 
-        const isDocument = data.parcelType === 'document';
-        const isSameDistrict = data.senderDistrict === data.receiverDistrict;
-        const parcelWeight = parseFloat(data.parcelWeight);
+    if (isDocument) {
+        cost = isSameDistrict ? 60 : 80;
+    } else {
+        if (parcelWeight <= 3) {
+            cost = isSameDistrict ? 110 : 150;
+        } else {
+            const minCharge = isSameDistrict ? 110 : 150;
+            const extraWeight = parcelWeight - 3;
+            const extraCharge = isSameDistrict
+                ? extraWeight * 40
+                : extraWeight * 40 + 40;
 
-        let cost = 0;
-        if (isDocument) {
-            cost = isSameDistrict ? 60 : 80;
+            cost = minCharge + extraCharge;
         }
-        else {
-            if (parcelWeight < 3) {
-                cost = isSameDistrict ? 110 : 150;
-            }
-            else {
-                const minCharge = isSameDistrict ? 110 : 150;
-                const extraWeight = parcelWeight - 3;
-                const extraCharge = isSameDistrict ? extraWeight * 40 : extraWeight * 40 + 40;
-
-                cost = minCharge + extraCharge;
-            }
-        }
-
-        console.log('cost', cost);
-        data.cost = cost;
-
-        // Swal.fire({
-        //     title: "Agree with the Cost?",
-        //     text: `You will be charged ${cost} taka!`,
-        //     icon: "warning",
-        //     showCancelButton: true,
-        //     confirmButtonColor: "#3085d6",
-        //     cancelButtonColor: "#d33",
-        //     confirmButtonText: "Confirm and Continue Payment!"
-        // }).then((result) => {
-        //     if (result.isConfirmed) {
-
-        //         // save the parcel info to the database
-        //         axiosSecure.post('/parcels', data)
-        //             .then(res => {
-        //                 console.log('after saving parcel', res.data);
-        //                 if (res.data.insertedId) {
-        //                     navigate('/dashboard/my-parcels')
-        //                     Swal.fire({
-        //                         position: "top-end",
-        //                         icon: "success",
-        //                         title: "Parcel has created. Please Pay",
-        //                         showConfirmButton: false,
-        //                         timer: 2500
-        //                     });
-        //                 }
-        //             })
-
-
-        //     }
-        // });
-
     }
+
+    data.cost = cost;
+
+    Swal.fire({
+        title: "Agree with the Cost?",
+        text: `You will be charged ${cost} taka!`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Confirm & Pay",
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            axiosSecure.post('/parcels', data)
+                .then(res => {
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Parcel Created!",
+                            text: "Now proceed to payment.",
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+console.log(res)
+                        // navigate('/dashboard/my-parcels');
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    Swal.fire("Error", "Something went wrong!", "error");
+                });
+        }
+    });
+};
+
+    // const handleSendParcel = data => {
+    //     console.log(data);
+
+    //     const isDocument = data.parcelType === 'document';
+    //     const isSameDistrict = data.senderDistrict === data.receiverDistrict;
+    //     const parcelWeight = parseFloat(data.parcelWeight);
+
+    //     let cost = 0;
+    //     if (isDocument) {
+    //         cost = isSameDistrict ? 60 : 80;
+    //     }
+    //     else {
+    //         if (parcelWeight < 3) {
+    //             cost = isSameDistrict ? 110 : 150;
+    //         }
+    //         else {
+    //             const minCharge = isSameDistrict ? 110 : 150;
+    //             const extraWeight = parcelWeight - 3;
+    //             const extraCharge = isSameDistrict ? extraWeight * 40 : extraWeight * 40 + 40;
+
+    //             cost = minCharge + extraCharge;
+    //         }
+    //     }
+
+    //     console.log('cost', cost);
+    //     data.cost = cost;
+
+    //     SweetAlert2.fire({
+    //     title: "Agree with the Cost?",
+    //     text: `You will be charged ${cost} taka!`,
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //     confirmButtonText: "Confirm and Continue Payment!"
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+
+    //             // save the parcel info to the database
+    //     //         axiosSecure.post('/parcels', data)
+    //     //             .then(res => {
+    //     //                 console.log('after saving parcel', res.data);
+    //     //                 if (res.data.insertedId) {
+    //     //                     navigate('/dashboard/my-parcels')
+    //     //                     Swal.fire({
+    //     //                         position: "top-end",
+    //     //                        icon: "success",
+    //     //                         title: "Parcel has created. Please Pay",
+    //     //                         showConfirmButton: false,
+    //     //                         timer: 2500
+    //     // });
+    //     //                 }
+    //     //             })
+
+
+    //          }
+    //     });
+
+    // }
 
     return (
         <div>
