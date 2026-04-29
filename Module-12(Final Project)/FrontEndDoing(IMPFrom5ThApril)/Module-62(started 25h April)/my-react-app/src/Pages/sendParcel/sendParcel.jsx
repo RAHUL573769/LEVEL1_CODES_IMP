@@ -99,6 +99,8 @@ const SendParcel = () => {
                 {/* parcel type*/}
                 <div>
                     <label className="label mr-4">
+
+                        {/* <input type="radio" name="radio-4" className="radio radio-primary" defaultChecked /> */}
                         <input type="radio" {...register('parcelType')} value="document" className="radio" defaultChecked />
                         Document
                     </label>
