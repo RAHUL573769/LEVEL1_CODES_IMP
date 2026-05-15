@@ -2,7 +2,7 @@ const express = require("express")
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const { mongoose } = require("mongoose")
-
+const { ObjectId } = require("mongodb");
 const app = express()
 
 // parse application/x-www-form-urlencoded
@@ -54,15 +54,28 @@ const db = client.db("zapshiftDb");
       if (email) {
         query.senderEmail=email
       }
-      const cursor = parcelCollection.find(query)
+      const options={sort:{createdAt:-1}}
+      const cursor = parcelCollection.find(query,options)
       const result=await cursor.toArray()
       res.send(result)
     })
       app.post("/parcels", async (req, res) => {
-          const parcel = req.body
+        const parcel = req.body
+        parcel.createdAt = new Date();
           const result = await parcelCollection.insertOne(parcel)
           res.send(result)
       })
+app.delete("/parcels/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const query = {
+    _id: new ObjectId(id),
+  };
+console.log(query)
+  const result = await parcelCollection.deleteOne(query);
+
+  res.send(result);
+});
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });

@@ -7,11 +7,12 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import Swal from 'sweetalert2';
 const MyParcel = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiossSecure();
 
-    const { data: parcels = [] } = useQuery({
+    const { data: parcels = [] ,refetch} = useQuery({
         queryKey: ["myParcels", user?.email],
         enabled: !!user?.email,
         queryFn: async () => {
@@ -19,10 +20,97 @@ const MyParcel = () => {
             return res.data;
         }
     });
+    const handleParcelDelete = (id) => {
+    console.log(id)
 
+        Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+
+
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/parcels/${id}`).then(res => {
+                    console.log(res)
+                    if(res.data.
+deletedCount
+                    ) {
+                        refetch()
+                        Swal.fire({
+                            title:"Deleted",
+                            text:"Yuour parcel have been dleted",
+                            icon:"Success",
+
+                        })
+
+}
+                 }).catch(error => {
+                    console.log(error)
+
+                })
+            }
+//     if (result.isConfirmed)
+//         Swal.fire({
+//     title: "Deleted!",
+//     text: "Your file has been deleted.",
+//     icon: "success"
+//   });
+});
+}
     return (
         <div>
             <h1>My Parcel: {parcels.length}</h1>
+
+            <div className="overflow-x-auto">
+  <table className="table table-zebra">
+    {/* head */}
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Job</th>
+        <th>Favorite Color</th>
+      </tr>
+    </thead>
+    <tbody>
+     <table className="table table-zebra">
+  {/* head */}
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Cost</th>
+      <th>Payment Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {parcels.map((parcel, index) => (
+      <tr key={parcel._id}>
+        <th>{index + 1}</th>
+        <td>{parcel.parcelName}</td>
+        <td>{parcel.cost}</td>
+        <td>{parcel.paymentStatus}</td>
+        <td>
+                <button className="btn btn-sm">View</button>
+                  <button onClick={()=>{handleParcelDelete(parcel._id)}} className="btn btn-sm">Delete</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+    </tbody>
+  </table>
+            </div>
+
         </div>
     );
 };
